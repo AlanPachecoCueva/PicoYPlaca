@@ -1,4 +1,64 @@
 
+function analizeHour(hour){
+    //Schedule 7:00am - 9:30am / 16:00pm - 19:30
+    hour = hour.split(":");
+    //Hours
+    if(hour[0] >= 7 && hour[0] <= 9){
+
+        if(hour[0] == 9 && hour[1] <= 30){
+            //Está en pico y placa
+            return "1";
+        }
+        
+    }
+
+    if(hour[0] >= 16 && hour[0] <= 19){
+        if(hour[0] == 19 && hour[1] <= 30){
+            //Está en pico y placa
+            return "2";
+        }
+    }
+
+    return 0;
+}
+
+export function predictPlate(plate, day, hour){
+    
+
+    //Monday: 1, 2
+    if(day == "Monday" && plate[plate.length - 1] == "1" || plate[plate.length - 1] == "2"){
+        analizeHour(hour);
+    }
+    //Tuesday: 3, 4
+    if(day == "Tuesday"){
+
+
+    }
+    //Wednesday: 5, 6
+    if(day == "Wednesday"){
+
+
+    }
+    //Thursday: 7, 8
+    if(day == "Thursday"){
+
+
+    }
+    //Friday: 9, 0
+    if(day == "Friday"){
+
+
+    }
+
+
+    
+
+
+    if(plate[plate.length - 1] == 1){
+
+    }
+    
+}
 
 export function validateHour(hour){
     //The hours are in 24 hours format, and need to be separated by ":"

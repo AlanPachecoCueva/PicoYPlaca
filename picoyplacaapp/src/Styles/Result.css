@@ -18,3 +18,17 @@
     z-index: 1;
 }
 
+#resultButton{
+    position: fixed;
+    width:8%;
+    height: 10%;
+    border-radius: 20%;
+    top: 2%;
+    right:2%;
+
+    color:red;
+    background-color: #353742;
+    font-size: large;
+    font-weight: bold;
+}
+

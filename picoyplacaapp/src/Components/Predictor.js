@@ -23,6 +23,12 @@ function Predictor(){
 
     //To manage the button
     const [isDisabled, setDisabled] = useState(true);
+
+
+    const handleDisabled = (disp) =>{
+        setShowPredict(false);
+    }
+
     //To manage the date
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [plate, setPlate] = useState("");
@@ -75,7 +81,7 @@ function Predictor(){
         let valid = functions.validateHour(hour);
 
         //If it's not valid
-        if(valid == true){
+        if(valid === true){
             //Hide the error
             setColorHour(colorOK);
             setDisplayHourError("none");
@@ -114,7 +120,7 @@ function Predictor(){
         //In order to show the errors in real time:
         //let's to valid contains a boolean true o an string with the error of the plate
 
-        if(valid == true){
+        if(valid === true){
             // let day = functions.dayConverter(selectedDate.getDay());
             // console.log("Date: ", day);
 
@@ -152,9 +158,8 @@ function Predictor(){
             return;
         }
 
+        //Show the result component
         setShowPredict(true);
-        console.log("ee");
-
     }
 
 
@@ -206,7 +211,7 @@ function Predictor(){
             </div>
 
             {/* To show the prediction when the button is clicked */}
-            {showPredict? <ResultOfPredictor plate={plate} day={selectedDate.getDay()} hour={hour}></ResultOfPredictor>  :  <div></div>}
+            {showPredict? <ResultOfPredictor setDisplay={handleDisabled} plate={plate} day={functions.dayConverter(selectedDate.getDay())} hour={hour}></ResultOfPredictor>  :  <div></div>}
         </div>
     );
     
