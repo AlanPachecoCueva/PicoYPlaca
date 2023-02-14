@@ -3,7 +3,6 @@ function analizeHour(hour){
     //Schedule 7:00am - 9:30am / 16:00pm - 19:30
     hour = hour.split(":");
     
-    console.log("NewHour: ", hour);
 
     //To the morning
     if(hour[0] >= 7 && hour[0] <= 9){
@@ -49,7 +48,6 @@ function analizeHour(hour){
 
 export function predictPlate(plate, day, hour){
     //if canRoad is == 0 then can road
-    console.log("Day:", day);
     let canRoad = 0;
 
     //Monday: 1, 2
@@ -58,9 +56,7 @@ export function predictPlate(plate, day, hour){
     }
     //Tuesday: 3, 4
     if(day == "Tuesday" && plate[plate.length - 1] == "3" || plate[plate.length - 1] == "4"){
-        console.log("Hour: ", hour);
         canRoad = analizeHour(hour);
-        console.log("canRoad: ",canRoad);
     }
     //Wednesday: 5, 6
     if(day == "Wednesday" && plate[plate.length - 1] == "5" || plate[plate.length - 1] == "6"){
@@ -78,7 +74,6 @@ export function predictPlate(plate, day, hour){
 
     if(canRoad == 0){
         //Can road
-        console.log("Can Road");
         return("Can Road"); 
 
     }else if(canRoad == 1){
@@ -93,7 +88,11 @@ export function predictPlate(plate, day, hour){
 
 export function validateHour(hour){
     //The hours are in 24 hours format, and need to be separated by ":"
-    console.log("Hour: ", hour);
+
+    if(hour == null || hour.length < 1){
+        return "The string of the hour is empty.";
+    }
+
 
     //Validate symbol ":
     if(!hour.includes(":")){
@@ -141,6 +140,14 @@ export function validateHour(hour){
  
 }
 
+export function validateDate(date){
+    if(date == null || date.length < 1){
+        return "The date is empty.";
+    }
+    //If is not empty
+    return true;
+}
+
 export function validateLicensePlate(plate){
     //Let's to validate a plate
     
@@ -148,6 +155,11 @@ export function validateLicensePlate(plate){
     
     //The plates have's minimun 6 characters, 3 letters, a optional middle dash and minimun 
     //three and maximun four numbers
+
+    if(plate == null || plate.length < 1){
+        return "The string of the plate is empty.";
+    }
+
 
     //Minimun of 6 characters
     if(plate.length < 6){

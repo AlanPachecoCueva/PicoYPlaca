@@ -47,12 +47,18 @@ function Predictor(){
     const [displayHourError, setDisplayHourError] = useState("none"); 
     const [colorHour, setColorHour] = useState(colorOK);
 
+    //To date error
+    const [dateError, setDateError] = useState("None");
+    const [displayDateError, setDisplayDateError] = useState("none"); 
+    const [colorDate, setColorDate] = useState(colorOK);
+
     //To controll the predict button
     const [predictPlateOK, setPredictPlateOK] = useState(false);
     const [predictHourOK, setPredictHourOK] = useState(false);
+    const [predictDateOK, setPredictDateOK] = useState(false);
     const [showPredict, setShowPredict] = useState(false);
 
-    //To set the date in the useState
+    //To set the hour in the useState
     const hourHandle = (event) => {
         //New hour
         setHour(event.target.value);
@@ -64,6 +70,41 @@ function Predictor(){
         setSelectedDate(date);
     };
 
+    const validateDate = () =>{
+        
+        //To validate date
+        let valid = functions.validateDate(selectedDate);
+
+        //If is not valid
+        if(valid == true){
+
+            //Hide the error
+            
+            setColorDate(colorOK);
+            setDisplayDateError("none");
+
+            // Set the predictDateOK
+            setPredictDateOK(false);
+
+            //To activate the button
+            if(predictPlateOK && predictHourOK){
+                setDisabled(false);
+            }
+        }else{
+            //Show the error
+            setDateError(valid);
+            setColorDate(colorNotOK);
+            setDisplayDateError("inherit");
+
+            // Set the predictDateOK
+            setPredictDateOK(true);
+
+            //To disable the button
+            setDisabled(true);
+        }
+        
+    }
+
     //To set the plate in the useState
     const plateHandle = (event) => {
         //The new plate
@@ -73,17 +114,12 @@ function Predictor(){
 
 
     const validateHour = () =>{
-        //If the hour is empty
-        if(hour.length === 0){
-            return;
-        }
-
         //In order to show the errors in real time:
         //let's to valid contains a boolean true o an string with the error of the plate
         let valid = functions.validateHour(hour);
 
         //If it's not valid
-        if(valid === true){
+        if(valid == true){
             //Hide the error
             setColorHour(colorOK);
             setDisplayHourError("none");
@@ -92,7 +128,7 @@ function Predictor(){
             setPredictHourOK(true);
 
             //To activate the button
-            if(predictPlateOK){
+            if(predictPlateOK && predictDateOK){
                 setDisabled(false);
             }
         }else{
@@ -103,6 +139,9 @@ function Predictor(){
             setColorHour(colorNotOK);
             setDisplayHourError("inherit");
 
+            // Set the predictHourOK
+            setPredictHourOK(false);
+
             //To disable the button
             setDisabled(true);
         }
@@ -111,10 +150,6 @@ function Predictor(){
 
     //To validate tha data and show a result, an error or the "Pico y Placa" information
     const validatePlate = () =>{
-        //If the plate is empty
-        if(plate.length === 0){
-            return;
-        }
 
         //Valid contains a boolean true o an string with the error of the plate
         let valid = functions.validateLicensePlate(plate);
@@ -122,7 +157,7 @@ function Predictor(){
         //In order to show the errors in real time:
         //let's to valid contains a boolean true o an string with the error of the plate
 
-        if(valid === true){
+        if(valid == true){
             // let day = functions.dayConverter(selectedDate.getDay());
             // console.log("Date: ", day);
 
@@ -134,7 +169,7 @@ function Predictor(){
             setPredictPlateOK(true);
 
             //To activate the button
-            if(predictHourOK){
+            if(predictHourOK && predictDateOK){
                 setDisabled(false);
             }
         }else{
@@ -155,6 +190,7 @@ function Predictor(){
     const Predict = () =>{
         validatePlate();
         validateHour();
+        validateDate();
 
         if(isDisabled){
             return;
@@ -189,12 +225,15 @@ function Predictor(){
                         </div>
 
                         {/* Date information */}
-                        <div className="divInput">
+                        <div className="divInput" style={{border: `1px solid ${colorDate}`}}>
                             <h4 className="inputTitle">Day</h4>
                             <DatePicker className="inputItem"
                                 selected={selectedDate} 
-                                onChange={dateHandle} 
+                                onChange={dateHandle}
+                                onBlur={validateDate}
+                                placeholderText="MM/DD/YYYY"
                             />
+                            <p style={{ display: displayDateError }} className="inputError">{dateError}</p>
                         </div>
 
 

@@ -8,7 +8,6 @@ import * as functions from '../Functions/PredictorFunctions';
 function ResultOfPredictor(props){
 
     const handleDisplay = () =>{
-        console.log("Entra");
         props.setDisplay("none");
     }
 

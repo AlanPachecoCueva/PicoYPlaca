@@ -19,8 +19,7 @@ Schedules to not to road
 |    9, 0      |    Friday    |    7:00 - 9:30  |    16:00 - 19:30  |
 |    ----      |   Saturday   |         -       |          -        |  
 |    ----      |   Sunday     |         -       |          -        |
-|--------------|--------------|-----------------|-------------------|
-<br>
+
 ### Application area
 <br>
 <img width="457" alt="zone" src="https://www.adipiscor.com/img/uploads/images/pico_y_placa_quito.jpg">
