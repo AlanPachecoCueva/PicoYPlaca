@@ -12,7 +12,7 @@ import '../Styles/Predictor.css';
 import * as functions from '../Functions/PredictorFunctions';
 
 //Result component
-//import ResultOfPredictor from '../Components/Result';
+import ResultOfPredictor from '../Components/Result';
 
 
 

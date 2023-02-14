@@ -1,0 +1,20 @@
+#resultContainer{
+    /* To make it appear in the center of the screen*/
+    position: absolute;
+    width : 30vw;
+    height : 50vh;
+
+    /* Color */
+    background-color: #1f2025;
+    border: 3px solid #07080a;
+    border-radius: 5%;
+    
+    /* To center the component in the middle of screen */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* To make the result appear "up" in the layers */
+    z-index: 1;
+}
+
