@@ -23,10 +23,12 @@ function Predictor(){
 
     //To manage the button
     const [isDisabled, setDisabled] = useState(true);
-
+    const [blur, setBlur] = useState("0");
 
     const handleDisabled = (disp) =>{
         setShowPredict(false);
+        //When hide the predict let's to delete the blur of background
+        setBlur(0);
     }
 
     //To manage the date
@@ -160,59 +162,65 @@ function Predictor(){
 
         //Show the result component
         setShowPredict(true);
+
+        //When show the predict let's to make blur the background
+        setBlur(20);
     }
 
 
     return(
-        <div className="bigContainer">
-            <div className="card">
+        <>
+            <div className="bigContainer" style={{filter: `blur(${blur}px)`}}>
+                <div className="card">
 
-                {/* Title */}
-                <h2 className="title" >Pico y Placa Predictor</h2>
+                    {/* Title */}
+                    <h2 className="title" >Pico y Placa Predictor</h2>
 
 
-                <div id="cardInputs">
+                    <div id="cardInputs">
 
-                    {/* Plate information */}
-                    <div className="divInput" style={{border: `1px solid ${colorPlate}`}}>
-                        <h4 className="inputTitle">Plate</h4>
+                        {/* Plate information */}
+                        <div className="divInput" style={{border: `1px solid ${colorPlate}`}}>
+                            <h4 className="inputTitle">Plate</h4>
 
-                        <input placeholder="ADG-1548" type="text" className="inputItem" id="plate" onBlur={validatePlate} onChange={plateHandle}></input>
+                            <input placeholder="ADG-1548" type="text" className="inputItem" id="plate" onBlur={validatePlate} onChange={plateHandle}></input>
 
-                        <p style={{ display: displayPlateError }} className="inputError">{plateError}</p>
+                            <p style={{ display: displayPlateError }} className="inputError">{plateError}</p>
+                        </div>
+
+                        {/* Date information */}
+                        <div className="divInput">
+                            <h4 className="inputTitle">Day</h4>
+                            <DatePicker className="inputItem"
+                                selected={selectedDate} 
+                                onChange={dateHandle} 
+                            />
+                        </div>
+
+
+                        {/* Hour information */}
+                        <div className="divInput" style={{border: `1px solid ${colorHour}`}}>
+                            <h4 className="inputTitle">Hour</h4>
+                            <input type="text" className="inputItem" placeholder='20:00' onChange={hourHandle} onBlur={validateHour}></input>
+
+                            <p style={{ display: displayHourError }} className="inputError">{hourError}</p>
+                        </div>
+
+
                     </div>
 
-                    {/* Date information */}
-                    <div className="divInput">
-                        <h4 className="inputTitle">Day</h4>
-                        <DatePicker className="inputItem"
-                            selected={selectedDate} 
-                            onChange={dateHandle} 
-                        />
-                    </div>
 
-
-                    {/* Hour information */}
-                    <div className="divInput" style={{border: `1px solid ${colorHour}`}}>
-                        <h4 className="inputTitle">Hour</h4>
-                        <input type="text" className="inputItem" placeholder='14:00' onChange={hourHandle} onBlur={validateHour}></input>
-
-                        <p style={{ display: displayHourError }} className="inputError">{hourError}</p>
-                    </div>
+                    {/* Predict Button */}
+                    <input type="button" className="button" value="Predict" onClick={Predict}></input>
 
 
                 </div>
 
-
-                {/* Predict Button */}
-                <input type="button" className="button" value="Predict" onClick={Predict}></input>
-
-
+                
             </div>
-
             {/* To show the prediction when the button is clicked */}
             {showPredict? <ResultOfPredictor setDisplay={handleDisabled} plate={plate} day={functions.dayConverter(selectedDate.getDay())} hour={hour}></ResultOfPredictor>  :  <div></div>}
-        </div>
+        </>
     );
     
 }

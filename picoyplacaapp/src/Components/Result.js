@@ -3,6 +3,8 @@ import React from "react";
 //Styles
 import '../Styles/Result.css';
 
+import * as functions from '../Functions/PredictorFunctions';
+
 function ResultOfPredictor(props){
 
     const handleDisplay = () =>{
@@ -14,9 +16,11 @@ function ResultOfPredictor(props){
     return(
         <div id="resultContainer">
             <input type="button" id="resultButton" value="X" onClick={handleDisplay}></input>
-            <h3>Plate: {props.plate}</h3>
-            <h4>Day: {props.day}</h4>
-            <h4>Hour: {props.hour}</h4>
+            <h3>{props.plate.toUpperCase()}</h3>
+            <h4>{props.day} | {props.hour}</h4>
+            <div id="restultTextContainer">
+                <p>{functions.predictPlate(props.plate, props.day, props.hour)}</p>
+            </div>
         </div>
 
     );

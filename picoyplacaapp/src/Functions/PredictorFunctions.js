@@ -2,60 +2,91 @@
 function analizeHour(hour){
     //Schedule 7:00am - 9:30am / 16:00pm - 19:30
     hour = hour.split(":");
-    //Hours
+    
+    console.log("NewHour: ", hour);
+
+    //To the morning
     if(hour[0] >= 7 && hour[0] <= 9){
 
-        if(hour[0] == 9 && hour[1] <= 30){
-            //Está en pico y placa
+        //If is not at 9am, don't need to verify the minute
+        if(hour[0] != 9){
             return "1";
+        }
+
+        //If it's at 9am
+
+        if(hour[1] <= 30){
+            //Can´t road at morning
+            return "1";
+        }else{
+            return "0";
         }
         
     }
 
+
+    //To the evening
     if(hour[0] >= 16 && hour[0] <= 19){
-        if(hour[0] == 19 && hour[1] <= 30){
-            //Está en pico y placa
+
+        //If is not at 19pm, don't need to verify the minute
+        if(hour[0] != 19){
             return "2";
         }
+
+        //If it's at 19pm
+        if(hour[1] <= 30){
+            //Can´t road at evening
+            return "2";
+        }else{
+            return "0";
+        }
+        
     }
 
+    //Can road
     return 0;
 }
 
 export function predictPlate(plate, day, hour){
-    
+    //if canRoad is == 0 then can road
+    console.log("Day:", day);
+    let canRoad = 0;
 
     //Monday: 1, 2
     if(day == "Monday" && plate[plate.length - 1] == "1" || plate[plate.length - 1] == "2"){
-        analizeHour(hour);
+        canRoad = analizeHour(hour);
     }
     //Tuesday: 3, 4
-    if(day == "Tuesday"){
-
-
+    if(day == "Tuesday" && plate[plate.length - 1] == "3" || plate[plate.length - 1] == "4"){
+        console.log("Hour: ", hour);
+        canRoad = analizeHour(hour);
+        console.log("canRoad: ",canRoad);
     }
     //Wednesday: 5, 6
-    if(day == "Wednesday"){
-
-
+    if(day == "Wednesday" && plate[plate.length - 1] == "5" || plate[plate.length - 1] == "6"){
+        canRoad = analizeHour(hour);
     }
     //Thursday: 7, 8
-    if(day == "Thursday"){
-
-
+    if(day == "Thursday" && plate[plate.length - 1] == "7" || plate[plate.length - 1] == "8"){
+        canRoad = analizeHour(hour);
     }
     //Friday: 9, 0
-    if(day == "Friday"){
-
-
+    if(day == "Friday" && plate[plate.length - 1] == "9" || plate[plate.length - 1] == "0"){
+        canRoad = analizeHour(hour);
     }
 
 
-    
+    if(canRoad == 0){
+        //Can road
+        console.log("Can Road");
+        return("Can Road"); 
 
-
-    if(plate[plate.length - 1] == 1){
-
+    }else if(canRoad == 1){
+        console.log("Can't road; since 7:00am to 9:30am");
+        return("Can't road; since 7:00am to 9:30am");
+    }else if(canRoad == 2){
+        console.log("Can't road; since 16:00pm to 19:30");
+        return("Can't road; since 16:00pm to 19:30");
     }
     
 }
@@ -88,9 +119,9 @@ export function validateHour(hour){
     }
 
 
-    //The same, the minutes can have between 1 and 2 characters
-    if(separated[1].length < 1 || separated[1].length > 2){
-        return "The minutes should have 1-2 characters.";
+    //The minutes should have 2 characters
+    if(separated[1].length < 2 || separated[1].length > 2){
+        return "The minutes should have 2 characters.";
     }
 
     //Validate the maximun number 23 for the hours and 59 for the minutes
