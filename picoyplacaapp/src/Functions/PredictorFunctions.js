@@ -51,37 +51,35 @@ export function predictPlate(plate, day, hour){
     let canRoad = 0;
 
     //Monday: 1, 2
-    if(day == "Monday" && plate[plate.length - 1] == "1" || plate[plate.length - 1] == "2"){
+    if(day == "Monday" && (plate[plate.length - 1] == "1" || plate[plate.length - 1] == "2")){
         canRoad = analizeHour(hour);
     }
     //Tuesday: 3, 4
-    if(day == "Tuesday" && plate[plate.length - 1] == "3" || plate[plate.length - 1] == "4"){
+    if(day == "Tuesday" && (plate[plate.length - 1] == "3" || plate[plate.length - 1] == "4")){
         canRoad = analizeHour(hour);
     }
     //Wednesday: 5, 6
-    if(day == "Wednesday" && plate[plate.length - 1] == "5" || plate[plate.length - 1] == "6"){
+    if(day == "Wednesday" && (plate[plate.length - 1] == "5" || plate[plate.length - 1] == "6")){
         canRoad = analizeHour(hour);
     }
     //Thursday: 7, 8
-    if(day == "Thursday" && plate[plate.length - 1] == "7" || plate[plate.length - 1] == "8"){
+    if(day == "Thursday" && (plate[plate.length - 1] == "7" || plate[plate.length - 1] == "8")){
         canRoad = analizeHour(hour);
     }
     //Friday: 9, 0
-    if(day == "Friday" && plate[plate.length - 1] == "9" || plate[plate.length - 1] == "0"){
+    if(day == "Friday" && (plate[plate.length - 1] == "9" || plate[plate.length - 1] == "0")){
         canRoad = analizeHour(hour);
     }
 
 
     if(canRoad == 0){
         //Can road
-        return("Can Road"); 
+        return("Can Road."); 
 
     }else if(canRoad == 1){
-        console.log("Can't road; since 7:00am to 9:30am");
-        return("Can't road; since 7:00am to 9:30am");
+        return("Can't road; since 7:00am to 9:30am.");
     }else if(canRoad == 2){
-        console.log("Can't road; since 16:00pm to 19:30");
-        return("Can't road; since 16:00pm to 19:30");
+        return("Can't road; since 16:00pm to 19:30pm.");
     }
     
 }
