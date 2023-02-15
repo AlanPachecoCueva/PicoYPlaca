@@ -36,7 +36,7 @@ Run that into the project folder called "picoyplacaapp".
 That will run the application in a provisional server at: [http://localhost:3000](http://localhost:3000) 
 
 ## Running tests
-I implemented tests by jest that is a tool included in react to do unit test in functions.
+I implemented tests by jest that is a tool included in react to do unit tests in functions.
 
 In order to run the test, please go to the terminal and locate on "picoyplacaapp" folder, then
 execute: 
